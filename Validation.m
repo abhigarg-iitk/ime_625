@@ -13,7 +13,4 @@ function [valid] = Validation(transition)
             return 
         end
     end
-    
-    
-
 end
