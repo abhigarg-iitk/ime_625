@@ -1,4 +1,4 @@
-function [group_num group_cnt] = Scc(transition)
+function [group_num group_cnt communicating] = Scc(transition)
     transitionR = transition';
     n = size(transition,1);
     stk = zeros(1,n+1);
@@ -43,5 +43,24 @@ function [group_num group_cnt] = Scc(transition)
     group_num = [group_num ; 1:n];
     [m k] = sort(group_num(1,:));
     group_num = group_num(:,k);
-    
+    j=1;
+    communicating = [];
+    for i = 1:group_cnt
+        out_group = [];
+        real_out_group = [];
+        while(j<=n && group_num(1,j)==i)
+            out_group = [out_group group_num(2,j)] ;
+            for k = 1:n
+                if transition(group_num(2,j),k) ~= 0
+                    real_out_group = [real_out_group k];
+                end
+            end
+            j = j+1;
+        end
+        real_out_group = [real_out_group out_group];
+        if size(unique(real_out_group)) == size(out_group)
+            str = sprintf('%d is a absorbing block',i)
+            communicating = [communicating i];
+        end
+    end
 end
