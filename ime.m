@@ -1,5 +1,7 @@
 transition = dlmread('matrix',' ');
 transition
+%Periodicity(transition);
+%StationaryDistr(transition);
 if Validation(transition) == 0
     return
 end
@@ -13,6 +15,7 @@ StepTransition(transition, a(1));
 [group_num group_cnt communicating] = Scc(transition)
 transition_m = merge(transition,group_num, group_cnt, communicating)
 %%MC.
+
 [p q r dir] = Beautify(transition_m);
 w = ExpectedNumVisits(q,dir);
 u = HittingProb(w,r,dir);

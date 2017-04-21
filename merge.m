@@ -34,7 +34,8 @@ while( a <= size(transition,2))
     if size(arr,2) > 1
         %%here function by anuj will come as
         %%anuj(transition([i:marker],[i:marker]))
-        str = 'anuj'
+        Periodicity(transition(arr,arr));
+        StationaryDistr(transition(arr,arr));
     end
 end
 end
